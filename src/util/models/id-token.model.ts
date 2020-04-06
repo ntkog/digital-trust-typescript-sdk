@@ -21,15 +21,19 @@ export interface IdToken {
     age?: number
     birthdate?: Date
     total_balance?: {
-        currency?: string,
-        amount?: number
+        props?: {
+            currency?: string,
+            amount?: number
+        }
     }
     address?: {
-        formatted?: string
-        street_address?: string
-        locality?: string
-        region?: string
-        postal_code?: string
-        country?: string
+        props?: {
+            formatted?: string
+            street_address?: string
+            locality?: string
+            region?: string
+            postal_code?: string
+            country?: string
+        }
     }
 }

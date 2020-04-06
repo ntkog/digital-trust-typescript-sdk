@@ -35,11 +35,12 @@ function prepareVerifyingClaims(assertionClaims: AssertionClaims) {
       ial: claim.ial,
       essential: claim.essential
     }
-    const assertion = {}
+    let assertion = {}
     const type = claim.constructor.name
     switch (type) {
       case 'AssertionClaimComplex':
-        prepareAssertioForComplexClaim(claim, assertion)
+        prepareAssertionForComplexClaim(claim, assertion)
+        assertion = { props: assertion }
         break
       case 'AssertionClaimSimple':
       case 'AssertionClaimComparator':
@@ -58,7 +59,7 @@ function prepareAssertionForSimpleClaim(claim: AssertionClaim, assertion: {}) {
   assertion[simpleClaim.operator] = prepareOperand(simpleClaim.operand)
 }
 
-function prepareAssertioForComplexClaim(claim: AssertionClaim, assertion: {}) {
+function prepareAssertionForComplexClaim(claim: AssertionClaim, assertion: any) {
   const complexClaim = claim as AssertionClaimComplex
   complexClaim.properties.forEach(property => {
     const internalAssertion = {}

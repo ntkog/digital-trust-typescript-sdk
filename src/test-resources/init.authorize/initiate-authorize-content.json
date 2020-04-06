@@ -37,11 +37,13 @@
           "purpose": "total balance assertion purpose",
           "essential": true,
           "assertion": {
-            "amount": {
-              "eq": 100.01
-            },
-            "currency": {
-              "eq": "GBP"
+            "props": {
+              "amount": {
+                "eq": 100.01
+              },
+              "currency": {
+                "eq": "GBP"
+              }
             }
           }
         }

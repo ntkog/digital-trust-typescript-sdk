@@ -1,6 +1,6 @@
 # Changelog 
 
-### 0.3.2
+### 0.4.0
 * Assertion language has removed all usages of `$`, now the syntax is:
   * eq 
   * gt 

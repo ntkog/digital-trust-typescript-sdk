@@ -1,7 +1,9 @@
-const { Claims, AssertionClaims, Address, Balance } = require('@santander/rp-client-typescript').Model
-const { VerifiedIdClient, InitiateAuthorizeRequestBuilder, TokenRequestBuilder } = require('@santander/rp-client-typescript').Client
+const { Claims, AssertionClaims, Address, Balance } = require('@gruposantander/rp-client-typescript').Model
+const { VerifiedIdClient, InitiateAuthorizeRequestBuilder, TokenRequestBuilder } = require('@gruposantander/rp-client-typescript').Client
 
 const resolve = require('path').resolve
+
+const wellKnownUri = 'https://op.iamid.io/.well-known/openid-configuration';
 
 const claims = new Claims()
 claims.email().withEssential(true).withPurpose('email purpose')
@@ -25,13 +27,13 @@ doInitAuthorize()
 async function doInitAuthorize() {
   try {
     const verifyidclient = await VerifiedIdClient.createInstance({
-      wellKnownURI: 'https://op-iamid-verifiedid-pro.e4ff.pro-eu-west-1.openshiftapps.com/.well-known/openid-configuration',
+      wellKnownURI: wellKnownUri,
       privateJWK: resolve('./secrets/quick-jobs.json'),
-      clientId: '835822af-ae41-4513-96b0-ec5b619b43a9'
+      clientId: 'IIvRB-z9e0mTVDfrXpAsy'
     })
     await verifyidclient.setUpClient()
     const request = new InitiateAuthorizeRequestBuilder()
-      .withRedirectURI('com.jobs://authorized')
+      .withRedirectURI('http://localhost:4201/profile')
       .withAssertionClaims(assertionClaims)
       .withClaims(claims)
       .withPurpose('top level purpose')
@@ -46,20 +48,14 @@ async function doInitAuthorize() {
 
 async function tokenExample() {
   try {
-    // const verifyidclient = await VerifiedIdClient.createInstance({
-    //   wellKnownURI: 'https://op-iamid-verifiedid-pro.e4ff.pro-eu-west-1.openshiftapps.com/.well-known/openid-configuration',
-    //   privateJWK: resolve('./secrets/private.json'),
-    //   clientId: 'TEST-2754efa75e8c4d11a6d7f95b90cd8e40-TEST'
-    // })
     const verifyidclient = await VerifiedIdClient.createInstance({
-      wellKnownURI: 'https://op-iamid-verifiedid-pro.e4ff.pro-eu-west-1.openshiftapps.com/.well-known/openid-configuration',
+      wellKnownURI: wellKnownUri,
       privateJWK: resolve('./secrets/quick-jobs.json'),
-      clientId: '835822af-ae41-4513-96b0-ec5b619b43a9'
+      clientId: 'IIvRB-z9e0mTVDfrXpAsy'
     })
     await verifyidclient.setUpClient()
     const request = new TokenRequestBuilder()
-      // .withRedirectUri('https://www.sainsburys.co.uk')
-      .withRedirectUri('com.jobs://authorized')
+      .withRedirectURI('http://localhost:4201/profile')
       .withCodeVerifier('gekBHnGA5NLuX2z-fVNIrdpbPAFfUj0hthCwYPXji7d')
       .withCode('07G60dVyAmkUxcqI7YXd5TPwx2nA_GXhfLHWRxS69UG')
       .build()

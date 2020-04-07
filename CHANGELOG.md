@@ -1,4 +1,6 @@
 # Changelog 
+### 0.4.1
+Added external publish details for github package
 
 ### 0.4.0
 * Assertion language has removed all usages of `$`, now the syntax is:

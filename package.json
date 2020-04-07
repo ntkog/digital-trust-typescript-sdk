@@ -1,6 +1,6 @@
 {
   "name": "@gruposantander/rp-client-typescript",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "",
   "main": "lib/api.js",
   "types": "lib/api.d.ts",
@@ -60,5 +60,8 @@
       "pre-commit": "npm run lint",
       "pre-push": "npm run test"
     }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }

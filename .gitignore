@@ -3,4 +3,3 @@ node_modules
 lib/
 examples/secrets
 coverage/
-.npmrc

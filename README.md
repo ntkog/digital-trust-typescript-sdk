@@ -5,9 +5,9 @@ As such, it shouldn't have any compatibility issues with other frameworks.
 
 #### How to use it
 
-Import the dependency as a devDependency
+Import the dependency as a dependency
 ```
-npm install -D @gruposantander/rp-client-typescript
+npm install @gruposantander/rp-client-typescript
 ```
 
 The first step is to create the client and set it up:

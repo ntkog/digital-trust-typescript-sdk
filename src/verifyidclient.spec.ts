@@ -73,7 +73,7 @@ describe('VerifiedIdClient', () => {
       httpClientMock = mock(HttpClientAxios)
       httpClient = instance(httpClientMock)
       verifyidclient = await VerifiedIdClient.createInstance({
-        wellKnownURI: 'https://op-iamid-verifiedid-pro.e4ff.pro-eu-west-1.openshiftapps.com/.well-known/openid-configuration',
+        wellKnownURI: 'https://live.iamid.io/.well-known/openid-configuration',
         privateJWK: './test-resources/private-jwk.json',
         clientId: '123',
         httpClient,
@@ -115,7 +115,7 @@ describe('VerifiedIdClient', () => {
         // @ts-ignore
         expect(verifyidclient.opConfiguration.jwks.get('op_key_1').use).toEqual(require('./test-resources/jwks.json').keys[0].use)
 
-        verify(httpClientMock.callSimpleGET('https://op-iamid-verifiedid-pro.e4ff.pro-eu-west-1.openshiftapps.com/.well-known/openid-configuration')).called()
+        verify(httpClientMock.callSimpleGET('https://live.iamid.io/.well-known/openid-configuration')).called()
         verify(httpClientMock.callSimpleGET('http://localhost:9099/jwks')).called()
 
         done()
@@ -131,7 +131,7 @@ describe('VerifiedIdClient', () => {
         await expect(verifyidclient.setUpClient())
           .rejects.toEqual(new Error('Value of authorizationEndpoint missing from well-known configuration'))
 
-        verify(httpClientMock.callSimpleGET('https://op-iamid-verifiedid-pro.e4ff.pro-eu-west-1.openshiftapps.com/.well-known/openid-configuration')).called()
+        verify(httpClientMock.callSimpleGET('https://live.iamid.io/.well-known/openid-configuration')).called()
         verify(httpClientMock.callSimpleGET('http://localhost:9099/jwks')).never()
 
         done()
@@ -149,7 +149,7 @@ describe('VerifiedIdClient', () => {
         await expect(verifyidclient.setUpClient())
           .rejects.toEqual(new Error('unsupported key type'))
 
-        verify(httpClientMock.callSimpleGET('https://op-iamid-verifiedid-pro.e4ff.pro-eu-west-1.openshiftapps.com/.well-known/openid-configuration')).called()
+        verify(httpClientMock.callSimpleGET('https://live.iamid.io/.well-known/openid-configuration')).called()
         verify(httpClientMock.callSimpleGET('http://localhost:9099/jwks')).called()
 
         done()

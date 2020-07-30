@@ -1,4 +1,4 @@
-### Javascript/Typescript SDK for Santander Digital Trust
+### Javascript/Typescript SDK for Santander Digital Trust Protocol
 
 This is a plain JS/TS library, it doesn't rely on any specific framework. <br>
 As such, it shouldn't have any compatibility issues with other frameworks.
@@ -14,7 +14,7 @@ The first step is to create the client and set it up:
 
 ```js
 const verifyidclient = await VerifiedIdClient.createInstance({
-  wellKnownURI: 'https://op-iamid-verifiedid-pro.e4ff.pro-eu-west-1.openshiftapps.com/.well-known/openid-configuration',
+  wellKnownURI: 'https://live.iamid.io/.well-known/openid-configuration',
   privateJWK: resolve('./secrets/privateKey.json'),
   clientId: '12345678-aaaa-bbbb-cccc-1234567890ab'
 }) // creating the client
@@ -59,7 +59,7 @@ const initiateAuthorizeResponse = await verifyidclient.initiateAuthorize(request
 
 From the above reponse, `initiateAuthorizeResponse.redirectionUri` can be used to redirect users to the consent journey:
 ```
-https://op-iamid-verifiedid-pro.e4ff.pro-eu-west-1.openshiftapps.com/web/login?request_uri=urn:op.iamid.io:JDAQ9YwMSLcCbiUz0Wq0HGjpu-wr4HngFDCv8tTkQa-
+https://live.iamid.io/web/login?request_uri=urn:op.iamid.io:JDAQ9YwMSLcCbiUz0Wq0HGjpu-wr4HngFDCv8tTkQa-
 ```
 The consent process (happening in a browser, out of scope for this SDK) finishes with an authorization code:
 ```
@@ -126,9 +126,9 @@ The SDK supports the same verifying claims as it does for sharing, though the da
 There are three types of assertions in this SDK: _simple_, _comparative_ and _complex_.
  * *Simple assertions*:  they support only the ``.eq`` (equal assertion), e.g.
     ```js
-    assertionClaims.email().eq("jane.doe@santander.co.uk")
+    assertionClaims.email().eq("jane.doe@op-example.com")
     ```
-   which translates into ``Verify that the email is "jane.doe@santander.co.uk"``
+   which translates into ``Verify that the email is "jane.doe@op-example.com"``
  * *Comparative assertions*: they extend _simple_ assertions with the ``.gt``, ``.gte``, ``.lt`` and ``.lte`` operations, e.g.:
    ```java
     assertionClaims.age().gte(18)

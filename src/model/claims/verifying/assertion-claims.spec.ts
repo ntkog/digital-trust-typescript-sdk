@@ -15,50 +15,50 @@ describe('assertion claims', () => {
   describe('simple claims', () => {
     describe('email', () => {
       it('should add email claim if not already present', () => {
-        claims.email().equal('john.doe@santander.co.uk')
+        claims.email().equal('john.doe@op-example.com')
         expect(claims.claims).toHaveLength(1)
         expect(claims.claims[0]).toMatchObject({
           _claimName: 'email',
-          _operand: 'john.doe@santander.co.uk',
+          _operand: 'john.doe@op-example.com',
           _operator: 'eq'
         })
       })
       it('should add email with _purpose claim if not already present', () => {
-        claims.email().equal('john.doe@santander.co.uk').withPurpose('my purpose')
+        claims.email().equal('john.doe@op-example.com').withPurpose('my purpose')
         expect(claims.claims).toHaveLength(1)
         expect(claims.claims[0]).toMatchObject({
           _claimName: 'email',
-          _operand: 'john.doe@santander.co.uk',
+          _operand: 'john.doe@op-example.com',
           _operator: 'eq',
           _purpose: 'my purpose'
         })
       })
       it('should replace email claim if already present', () => {
-        claims.email().equal('john.doe@santander.co.uk')
-        claims.email().equal('john.smith@santander.co.uk')
+        claims.email().equal('john.doe@op-example.com')
+        claims.email().equal('john.smith@op-example.com')
         expect(claims.claims).toHaveLength(1)
         expect(claims.claims[0]).toMatchObject({
           _claimName: 'email',
-          _operand: 'john.smith@santander.co.uk',
+          _operand: 'john.smith@op-example.com',
           _operator: 'eq'
         })
       })
       it('should add email with essential claim if not already present', () => {
-        claims.email().equal('john.doe@santander.co.uk').withEssential(true)
+        claims.email().equal('john.doe@op-example.com').withEssential(true)
         expect(claims.claims).toHaveLength(1)
         expect(claims.claims[0]).toMatchObject({
           _claimName: 'email',
-          _operand: 'john.doe@santander.co.uk',
+          _operand: 'john.doe@op-example.com',
           _operator: 'eq',
           _essential: true
         })
       })
       it('should add email with ial claim if not already present', () => {
-        claims.email().equal('john.doe@santander.co.uk').withIAL(IAL.THREE)
+        claims.email().equal('john.doe@op-example.com').withIAL(IAL.THREE)
         expect(claims.claims).toHaveLength(1)
         expect(claims.claims[0]).toMatchObject({
           _claimName: 'email',
-          _operand: 'john.doe@santander.co.uk',
+          _operand: 'john.doe@op-example.com',
           _operator: 'eq',
           _ial: 3
         })
@@ -224,7 +224,7 @@ describe('assertion claims', () => {
 
       it('should add givenName with _purpose and email with purpose when neither are present', () => {
         claims.givenName().equal('Smith').withPurpose('name purpose')
-        claims.email().equal('john.doe@santander.co.uk').withPurpose('email purpose')
+        claims.email().equal('john.doe@op-example.com').withPurpose('email purpose')
         expect(claims.claims).toHaveLength(2)
         expect(claims.claims).toMatchObject([{
           _claimName: 'given_name',
@@ -233,7 +233,7 @@ describe('assertion claims', () => {
           _purpose: 'name purpose'
         }, {
           _claimName: 'email',
-          _operand: 'john.doe@santander.co.uk',
+          _operand: 'john.doe@op-example.com',
           _operator: 'eq',
           _purpose: 'email purpose'
         }])
@@ -310,12 +310,12 @@ describe('assertion claims', () => {
       })
 
       it('should add email with purpose and birthdate with purpose when neither are present', () => {
-        claims.email().equal('john.doe@santander.co.uk').withPurpose('email purpose')
+        claims.email().equal('john.doe@op-example.com').withPurpose('email purpose')
         claims.birthdate().equal(Constants.DATE_28_FEB_2002).withPurpose('birthdate purpose')
         expect(claims.claims).toHaveLength(2)
         expect(claims.claims).toMatchObject([{
           _claimName: 'email',
-          _operand: 'john.doe@santander.co.uk',
+          _operand: 'john.doe@op-example.com',
           _operator: 'eq',
           _purpose: 'email purpose'
         }, {

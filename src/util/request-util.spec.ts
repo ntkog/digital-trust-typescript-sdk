@@ -12,7 +12,7 @@ describe('initiate authorize request', () => {
   beforeEach(() => {
     claims.givenName().withEssential(true).withPurpose('Given name purpose')
     assertionClaims.givenName().equal('John').withPurpose('This is why RP is verifying your name')
-    assertionClaims.email().equal('jane.doe@santander.co.uk').withPurpose('This is why RP is verifying your email')
+    assertionClaims.email().equal('jane.doe@op-example.com').withPurpose('This is why RP is verifying your email')
     assertionClaims.birthdate().equal(new Date(Date.parse('1970-01-01'))).withPurpose('This is why RP is verifying your DOB')
     assertionClaims.age().gt(18).withPurpose('age purpose')
     assertionClaims.totalBalance()
